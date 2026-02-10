@@ -13,10 +13,10 @@ function Search() {
   );
 }
 
-function NumResults() {
+function NumResults({movies}) {
   return (
     <p className="num-results">
-      Found <strong>x</strong> results
+      Found <strong>{movies.length}</strong> results
     </p>
   );
 }
@@ -30,12 +30,12 @@ function Logo() {
   );
 }
 
-function Navbar() {
+function Navbar({movies}) {
   return (
     <nav className="nav-bar">
       <Logo />
       <Search />
-      <NumResults />
+      <NumResults movies={movies}/>
     </nav>
   );
 }
