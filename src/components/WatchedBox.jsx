@@ -27,7 +27,7 @@ const average = (arr) =>
 
 export default function WatchedBox() {
   const [isOpen2, setIsOpen2] = useState(true);
-const [watched, setWatched] = useState(tempWatchedData);
+  const [watched, setWatched] = useState(tempWatchedData);
   return (
     <div className="box">
       <button
@@ -38,17 +38,15 @@ const [watched, setWatched] = useState(tempWatchedData);
       </button>
       {isOpen2 && (
         <>
-          <Summery watched={watched} />
-          <WatchedMovieList watched={watched}/>
+          <WatchedSummery watched={watched} />
+          <WatchedMovieList watched={watched} />
         </>
       )}
     </div>
   );
 }
 
-function Summery({ watched }) {
-  
-
+function WatchedSummery({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
@@ -77,31 +75,35 @@ function Summery({ watched }) {
   );
 }
 
-
-
-function WatchedMovieList({watched}) {
+function WatchedMovieList({ watched }) {
   return (
     <ul className="list">
-            {watched.map((movie) => (
-              <li key={movie.imdbID}>
-                <img src={movie.Poster} alt={`${movie.Title} poster`} />
-                <h3>{movie.Title}</h3>
-                <div>
-                  <p>
-                    <span>⭐️</span>
-                    <span>{movie.imdbRating}</span>
-                  </p>
-                  <p>
-                    <span>🌟</span>
-                    <span>{movie.userRating}</span>
-                  </p>
-                  <p>
-                    <span>⏳</span>
-                    <span>{movie.runtime} min</span>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+      {watched.map((movie,index) => (
+        <WatchedMovie movie={movie}  key={index}/>
+      ))}
+    </ul>
+  );
+}
+
+function WatchedMovie({ movie }) {
+  return (
+    <li key={movie.imdbID}>
+      <img src={movie.Poster} alt={`${movie.Title} poster`} />
+      <h3>{movie.Title}</h3>
+      <div>
+        <p>
+          <span>⭐️</span>
+          <span>{movie.imdbRating}</span>
+        </p>
+        <p>
+          <span>🌟</span>
+          <span>{movie.userRating}</span>
+        </p>
+        <p>
+          <span>⏳</span>
+          <span>{movie.runtime} min</span>
+        </p>
+      </div>
+    </li>
   );
 }
