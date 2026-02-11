@@ -1,9 +1,13 @@
 import { useState } from "react";
 function StarRating({ maxRating = 5 }) {
   const [rating, setRating] = useState(0);
+  const [tempoRating, setTempoRating] = useState(0);
 
   function handleRating(rating) {
     setRating(rating);
+  }
+  function handleTempoRating(rating){
+    setTempoRating(rating)
   }
 
   const containerStyle = {
@@ -26,11 +30,12 @@ function StarRating({ maxRating = 5 }) {
           <Star
             key={i + 1}
             onRange={() => handleRating(i + 1)}
+            onEnter={()=> handleTempoRating(i + 1)}
             full={rating >= i + 1}
           />
         ))}
       </div>
-      <div style={textStyle}>{rating || ""}</div>
+      <div style={textStyle}>{rating || tempoRating || ""}</div>
     </div>
   );
 }
@@ -41,9 +46,9 @@ const starStyle = {
   display: "block",
   width: "38px",
 };
-function Star({ onRange, full }) {
+function Star({ onRange, full ,onEnter}) {
   return (
-    <span style={starStyle} role="button" onClick={onRange}>
+    <span style={starStyle} role="button" onClick={onRange} onMouseEnter={onEnter}>
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
