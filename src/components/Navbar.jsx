@@ -30,10 +30,10 @@ export function Logo() {
   );
 }
 
-export function Navbar({childrens}) {
+export default function Navbar({children}) {
   return (
     <nav className="nav-bar">
-      {childrens}
+      {children}
     </nav>
   );
 }

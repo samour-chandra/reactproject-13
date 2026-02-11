@@ -1,52 +1,47 @@
 import { useState } from "react";
 
-const tempWatchedData = [
-  {
-    imdbID: "tt1375666",
-    Title: "Inception",
-    Year: "2010",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
-    runtime: 148,
-    imdbRating: 8.8,
-    userRating: 10,
-  },
-  {
-    imdbID: "tt0088763",
-    Title: "Back to the Future",
-    Year: "1985",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-    runtime: 116,
-    imdbRating: 8.5,
-    userRating: 9,
-  },
-];
+
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-export default function WatchedBox() {
-  const [isOpen2, setIsOpen2] = useState(true);
-  const [watched, setWatched] = useState(tempWatchedData);
+
+export function Box({ children }) {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <div className="box">
       <button
         className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
+        onClick={() => setIsOpen((open) => !open)}
       >
-        {isOpen2 ? "–" : "+"}
+        {isOpen ? "–" : "+"}
       </button>
-      {isOpen2 && (
-        <>
-          <WatchedSummery watched={watched} />
-          <WatchedMovieList watched={watched} />
-        </>
-      )}
+      {isOpen && children}
     </div>
   );
 }
 
-function WatchedSummery({ watched }) {
+// export default function WatchedBox() {
+//   const [isOpen2, setIsOpen2] = useState(true);
+//   const [watched, setWatched] = useState(tempWatchedData);
+//   return (
+//     <div className="box">
+//       <button
+//         className="btn-toggle"
+//         onClick={() => setIsOpen2((open) => !open)}
+//       >
+//         {isOpen2 ? "–" : "+"}
+//       </button>
+//       {isOpen2 && (
+//         <>
+//           <WatchedSummery watched={watched} />
+//           <WatchedMovieList watched={watched} />
+//         </>
+//       )}
+//     </div>
+//   );
+// }
+
+export function WatchedSummery({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
@@ -75,11 +70,11 @@ function WatchedSummery({ watched }) {
   );
 }
 
-function WatchedMovieList({ watched }) {
+export function WatchedMovieList({ watched }) {
   return (
     <ul className="list">
-      {watched.map((movie,index) => (
-        <WatchedMovie movie={movie}  key={index}/>
+      {watched.map((movie, index) => (
+        <WatchedMovie movie={movie} key={index} />
       ))}
     </ul>
   );
