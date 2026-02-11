@@ -6,8 +6,8 @@ function StarRating({ maxRating = 5 }) {
   function handleRating(rating) {
     setRating(rating);
   }
-  function handleTempoRating(rating){
-    setTempoRating(rating)
+  function handleTempoRating(rating) {
+    setTempoRating(rating);
   }
 
   const containerStyle = {
@@ -30,12 +30,13 @@ function StarRating({ maxRating = 5 }) {
           <Star
             key={i + 1}
             onRange={() => handleRating(i + 1)}
-            onEnter={()=> handleTempoRating(i + 1)}
+            onEnter={() => handleTempoRating(i + 1)}
+            onLeave={() => handleTempoRating(0)}
             full={rating >= i + 1}
           />
         ))}
       </div>
-      <div style={textStyle}>{rating || tempoRating || ""}</div>
+      <div style={textStyle}>{tempoRating || rating || ""}</div>
     </div>
   );
 }
@@ -46,9 +47,15 @@ const starStyle = {
   display: "block",
   width: "38px",
 };
-function Star({ onRange, full ,onEnter}) {
+function Star({ onRange, full, onEnter, onLeave }) {
   return (
-    <span style={starStyle} role="button" onClick={onRange} onMouseEnter={onEnter}>
+    <span
+      style={starStyle}
+      role="button"
+      onClick={onRange}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
