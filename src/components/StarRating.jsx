@@ -29,7 +29,7 @@ function StarRating({
     display: "flex",
     gap: "4px",
   };
-  const textStyle = {
+  const StyleForText = {
     lineHeight: "1",
     margin: "0",
     color,
@@ -50,7 +50,7 @@ function StarRating({
           />
         ))}
       </div>
-      <div style={textStyle}>
+      <div style={StyleForText}>
         {messages.length === maxRating
           ? messages[tempoRating ? tempoRating - 1 : rating - 1]
           : tempoRating || rating || ""}
