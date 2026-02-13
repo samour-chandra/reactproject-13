@@ -42,7 +42,7 @@ function StarRating({
           <Star
             key={i + 1}
             onRange={() => handleRating(i + 1)}
-            onEnter={() => handleTempoRating(i + 1)}
+            onEnterMouse={() => handleTempoRating(i + 1)}
             onLeave={() => handleTempoRating(0)}
             full={tempoRating ? tempoRating >= i + 1 : rating >= i + 1}
             color={color}
@@ -61,7 +61,7 @@ function StarRating({
 
 export default StarRating;
 
-function Star({ onRange, full, onEnter, onLeave, color, size }) {
+function Star({ onRange, full, onEnterMouse, onLeave, color, size }) {
   const starStyle = {
     height: `${size}px`,
     display: "block",
@@ -72,7 +72,7 @@ function Star({ onRange, full, onEnter, onLeave, color, size }) {
       style={starStyle}
       role="button"
       onClick={onRange}
-      onMouseEnter={onEnter}
+      onMouseEnter={onEnterMouse}
       onMouseLeave={onLeave}
     >
       {full ? (
