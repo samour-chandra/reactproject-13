@@ -25,7 +25,7 @@ function StarRating({
     alignItems: "center",
     gap: "16px",
   };
-  const starContainerStyle = {
+  const ContainerStarStyle = {
     display: "flex",
     gap: "4px",
   };
@@ -37,7 +37,7 @@ function StarRating({
   };
   return (
     <div style={containerStyle}>
-      <div style={starContainerStyle}>
+      <div style={ContainerStarStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
             key={i + 1}
