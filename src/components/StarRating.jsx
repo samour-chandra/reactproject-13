@@ -23,11 +23,11 @@ function StarRating({
   const containerStyle = {
     display: "flex",
     alignItems: "center",
-    gap: "16px",
+    gap: "18px",
   };
   const ContainerStarStyle = {
     display: "flex",
-    gap: "4px",
+    gap: "5px",
   };
   const StyleForText = {
     lineHeight: "1",
